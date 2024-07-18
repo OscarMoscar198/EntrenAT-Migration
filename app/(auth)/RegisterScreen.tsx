@@ -15,7 +15,7 @@ import {
   DefaultTheme,
 } from "react-native-paper";
 import { User } from "../../domain/User";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 const theme = {
   ...DefaultTheme,
@@ -100,7 +100,7 @@ export default function RegisterScreen() {
 
       if (response.ok) {
         console.log(data);
-        navigation.navigate("Login");
+        router.push("/LoginScreen");
       } else {
         console.error("Registration error:", data);
         alert("Registration failed: " + (data.message || "Unknown error"));
