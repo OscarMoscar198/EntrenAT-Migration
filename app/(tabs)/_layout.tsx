@@ -4,38 +4,40 @@ import { BottomNavigation, Text } from "react-native-paper";
 import  ChatBotScreen  from "./ChatBotScreen";
 import ProfileScreen from "./ProfileScreen";
 import StatsScreen from "./StatsScreen";
+import MuscleScreen from "./MuscleScreen";
+import GymbroScreen from "./GymbroScreen";
 
 const ProfileRoute = () => <ProfileScreen />;
 
 const ChatRoute = () => <ChatBotScreen />;
 
-// const GymbroRoute = () => <GymbroScreen />;
+const GymbroRoute = () => <GymbroScreen />;
 
 const StatsRoute = () => <StatsScreen />;
 
-// const MuscleRoute = () => <MuscleScreen />;
+const MuscleRoute = () => <MuscleScreen />;
 
 const BottomNavigationBar = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    // {
-    //   key: "gymbro",
-    //   title: "Gymbro",
-    //   focusedIcon: "account-group",
-    //   unfocusedIcon: "account-group-outline",
-    // },
+    {
+      key: "gymbro",
+      title: "Gymbro",
+      focusedIcon: "account-group",
+      unfocusedIcon: "account-group-outline",
+    },
     {
       key: "stats",
       title: "Stats",
       focusedIcon: "chart-box",
       unfocusedIcon: "chart-box-outline",
     },
-    // {
-    //   key: "muscles",
-    //   title: "Muscles",
-    //   focusedIcon: "arm-flex",
-    //   unfocusedIcon: "arm-flex-outline",
-    // },
+    {
+      key: "muscles",
+      title: "Muscles",
+      focusedIcon: "arm-flex",
+      unfocusedIcon: "arm-flex-outline",
+    },
     {
       key: "chat",
       title: "Chat",
@@ -51,9 +53,9 @@ const BottomNavigationBar = () => {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    // muscles: MuscleRoute,
+    muscles: MuscleRoute,
     stats: StatsRoute,
-    // gymbro: GymbroRoute,
+    gymbro: GymbroRoute,
     chat: ChatRoute,
     profile: ProfileRoute,
   });
