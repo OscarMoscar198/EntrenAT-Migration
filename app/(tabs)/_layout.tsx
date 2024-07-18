@@ -1,37 +1,73 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import React from "react";
+import { BottomNavigation, Text } from "react-native-paper";
+import  ChatBotScreen  from "./ChatBotScreen";
+import ProfileScreen from "./ProfileScreen";
+import StatsScreen from "./StatsScreen";
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const ProfileRoute = () => <ProfileScreen />;
+
+const ChatRoute = () => <ChatBotScreen />;
+
+// const GymbroRoute = () => <GymbroScreen />;
+
+const StatsRoute = () => <StatsScreen />;
+
+// const MuscleRoute = () => <MuscleScreen />;
+
+const BottomNavigationBar = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    // {
+    //   key: "gymbro",
+    //   title: "Gymbro",
+    //   focusedIcon: "account-group",
+    //   unfocusedIcon: "account-group-outline",
+    // },
+    {
+      key: "stats",
+      title: "Stats",
+      focusedIcon: "chart-box",
+      unfocusedIcon: "chart-box-outline",
+    },
+    // {
+    //   key: "muscles",
+    //   title: "Muscles",
+    //   focusedIcon: "arm-flex",
+    //   unfocusedIcon: "arm-flex-outline",
+    // },
+    {
+      key: "chat",
+      title: "Chat",
+      focusedIcon: "chat-processing",
+      unfocusedIcon: "chat-processing-outline",
+    },
+    {
+      key: "profile",
+      title: "Perfil",
+      focusedIcon: "account-box",
+      unfocusedIcon: "account-box-outline",
+    },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    // muscles: MuscleRoute,
+    stats: StatsRoute,
+    // gymbro: GymbroRoute,
+    chat: ChatRoute,
+    profile: ProfileRoute,
+  });
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+      activeColor="white" // color de los iconos activos
+      inactiveColor="white" // color de los iconos inactivos
+      barStyle={{ backgroundColor: "black" }} // color de fondo
+    />
   );
-}
+};
+
+export default BottomNavigationBar;
